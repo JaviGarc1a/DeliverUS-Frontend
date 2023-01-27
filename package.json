@@ -34,12 +34,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "eslint": "^7.32.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.1",
+    "eslint": "^8.32.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.24.0"
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.1"
   },
   "private": true
 }
