@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, FlatList, ImageBackground, Image, Pressable } from 'react-native'
+import { FlatList, Image, ImageBackground, StyleSheet, View } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { getDetail } from '../../api/RestaurantEndpoints'
 import ImageCard from '../../components/ImageCard'
 import TextRegular from '../../components/TextRegular'
 import TextSemiBold from '../../components/TextSemibold'
-import { brandPrimary, brandPrimaryTap, brandSecondary, flashStyle, flashTextStyle } from '../../styles/GlobalStyles'
+import { brandSecondary, flashStyle, flashTextStyle } from '../../styles/GlobalStyles'
 
 export default function RestaurantDetailScreen ({ navigation, route }) {
   const [restaurant, setRestaurant] = useState({})
