@@ -5,6 +5,7 @@ import { showMessage } from 'react-native-flash-message'
 import { getTopProduct } from '../../api/ProductEndpoints'
 import { getAll } from '../../api/RestaurantEndpoints'
 import ImageCard from '../../components/ImageCard'
+import ImageCardTop, { size } from '../../components/ImageCardTop'
 import TextRegular from '../../components/TextRegular'
 import TextSemiBold from '../../components/TextSemibold'
 import { brandPrimary, brandSecondary, flashStyle, flashTextStyle, brandBackground } from '../../styles/GlobalStyles'
@@ -12,7 +13,7 @@ import { brandPrimary, brandSecondary, flashStyle, flashTextStyle, brandBackgrou
 export default function RestaurantsScreen ({ navigation, route }) {
   // TODO: Create a state for storing the restaurants
   const [restaurants, setRestaurants] = useState([])
-  const [topProducts, setTopProducts] = useState([])
+  const [topProduct, setTopProducts] = useState([])
 
   useEffect(() => {
     // TODO: Fetch all restaurants and set them to state.
@@ -72,7 +73,7 @@ export default function RestaurantsScreen ({ navigation, route }) {
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20
           }}
-          data={topProducts}
+          data={topProduct}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: scrollX } } }],
             { useNativeDriver: true }
@@ -82,7 +83,7 @@ export default function RestaurantsScreen ({ navigation, route }) {
           pagingEnabled
           renderItem={({ item }) => {
             return <>
-              <ImageCard
+              <ImageCardTop
                 imageUri={item.image ? { uri: process.env.API_BASE_URL + '/' + item.image } : undefined}
                 title={item.name}
                 price={item.price}
@@ -91,7 +92,7 @@ export default function RestaurantsScreen ({ navigation, route }) {
                   navigation.navigate('RestaurantDetailScreen', { id: item.restaurantId })
                 }}
              >
-             </ImageCard>
+             </ImageCardTop>
             </>
           }}
           >
@@ -130,29 +131,26 @@ export default function RestaurantsScreen ({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  containerTop: {
+    padding: '1%',
+    alignItems: 'center',
+    backgroundColor: '#a7d1cf',
+    borderTopLeftRadius: 200,
+    borderTopRightRadius: 200
+  },
+  topTitle: {
+    fontSize: size * 1.7
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 50
   },
-  button: {
-    borderRadius: 8,
-    height: 40,
-    marginTop: 12,
-    padding: 10,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   text: {
     fontSize: 16,
     color: brandSecondary,
     textAlign: 'center',
     marginLeft: 5
-  },
-  emptyList: {
-    textAlign: 'center',
-    padding: 50
   }
 })
