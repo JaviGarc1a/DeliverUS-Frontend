@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, Image, ImageBackground, StyleSheet, View } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import { getDetail } from '../../api/RestaurantEndpoints'
+import ButtonCart from '../../components/ButtonCart'
 import ImageCard from '../../components/ImageCard'
 import TextRegular from '../../components/TextRegular'
 import TextSemiBold from '../../components/TextSemibold'
@@ -58,6 +59,7 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
       >
         <TextRegular numberOfLines={2}>{item.description}</TextRegular>
         <TextSemiBold textStyle={styles.price}>{item.price.toFixed(2)}€</TextSemiBold>
+        <ButtonCart />
       </ImageCard>
     )
   }
@@ -124,15 +126,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 50
   },
-  button: {
-    borderRadius: 8,
-    height: 40,
-    marginTop: 12,
-    padding: 10,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
+
   text: {
     fontSize: 16,
     color: brandSecondary,
