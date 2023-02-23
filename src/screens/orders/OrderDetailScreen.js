@@ -1,35 +1,61 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, FlatList, ImageBackground, Image, Pressable } from 'react-native'
+import { FlatList, StyleSheet, View, Text } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { getDetail } from '../../api/RestaurantEndpoints'
+import { getOrderDetail } from '../../api/OrderEndPoints'
 import ImageCard from '../../components/ImageCard'
 import TextRegular from '../../components/TextRegular'
 import TextSemiBold from '../../components/TextSemibold'
-import { brandPrimary, brandPrimaryTap, brandSecondary, flashStyle, flashTextStyle } from '../../styles/GlobalStyles'
+import { brandSecondary, flashStyle, flashTextStyle } from '../../styles/GlobalStyles'
 
 export default function OrderDetailScreen ({ navigation, route }) {
+  const [orders, setOrders] = useState([])
   useEffect(() => {
     async function fetchOrderDetail () {
-
+      try {
+        const fetchedOrder = await getOrderDetail(route.params.id)
+        setOrders(fetchedOrder)
+      } catch (error) {
+        showMessage({
+          message: `There was an error while retrieving Orders. ${error} `,
+          type: 'error',
+          style: flashStyle,
+          titleStyle: flashTextStyle
+        })
+      }
     }
     fetchOrderDetail()
   }, [route])
 
   const renderHeader = () => {
     return (
-      <View>
-
-      </View>
-    )
-  }
-
-  return (
     <View style={styles.container}>
           <TextSemiBold>FR6: Show order details</TextSemiBold>
           <TextRegular>A customer will be able to look his/her orders up. The system should provide all details of an order, including the ordered products and their prices.</TextRegular>
     </View>
+    )
+  }
+
+  const renderProduct = ({ item }) => {
+    return (
+        <ImageCard
+          imageUri={item.image ? { uri: process.env.API_BASE_URL + '/' + item.image } : undefined}
+          title={item.name}
+        >
+          <TextRegular numberOfLines={2}>{item.description}</TextRegular>
+          <TextSemiBold textStyle={styles.price}>Unity price: <Text>{item.price.toFixed(2)}€</Text></TextSemiBold>
+          <TextSemiBold>Quantity: <Text>{item.OrderProducts.quantity}</Text></TextSemiBold>
+          <TextSemiBold textStyle={styles.price}>Total price: <Text>{(item.price * item.OrderProducts.quantity).toFixed(2)}€</Text></TextSemiBold>
+        </ImageCard>
+    )
+  }
+
+  return (
+    <FlatList
+      ListHeaderComponent={renderHeader}
+      data={orders.products}
+      renderItem={renderProduct}
+    />
   )
 }
 
