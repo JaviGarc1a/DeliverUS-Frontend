@@ -8,8 +8,8 @@ function getOrderDetail (id) {
   return get(`orders/${id}`)
 }
 
-function create () {
-  return post('orders')
+function create (data) {
+  return post('orders', data)
 }
 
 export { getOrder, getOrderDetail, create }
