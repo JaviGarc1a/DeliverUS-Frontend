@@ -1,5 +1,7 @@
 # DeliverUS - Project Requirements
 
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_project02-blue.svg)](http://localhost:5600/dashboard/script/dashboardLoader.js?dashboardURL=http://localhost:5300/api/v4/dashboards/tpa-template-GH-JaviGarc1a_DeliverUS-Frontend/main)
+
 ## Introduction
 DeliverUS is a made-up company whose business is focused on delivering food from 3rd parties (restaurants) to customers. To this end, we are requested to develop the needed software products which hopefully will boost the company. After interviewing the product owners and some stakeholders, the general objectives and requirements have been agreed, as described in this document.
 
